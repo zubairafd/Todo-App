@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow – Todo App</title>
+  <meta name="description" content="A fast, accessible todo app with priorities, due dates and search.">
+  <!-- Apply saved/system theme before first paint to avoid a flash -->
+  <script>try{document.documentElement.dataset.theme=localStorage.getItem('taskflow:theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}</script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <main class="app">
+    <header class="app__head">
+      <div>
+        <h1>TaskFlow</h1>
+        <p id="summary" class="muted" aria-live="polite"></p>
+      </div>
+      <button id="theme" class="icon-btn" type="button" aria-label="Toggle dark mode">&#9680;</button>
+    </header>
+
+    <div class="progress" role="progressbar" aria-label="Completed tasks" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <span id="bar"></span>
+    </div>
+
+    <form id="form" class="card add" autocomplete="off">
+      <label class="sr" for="title">Task title</label>
+      <input id="title" placeholder="What needs to be done?" maxlength="120" required>
+      <label class="sr" for="priority">Priority</label>
+      <select id="priority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+      <label class="sr" for="due">Due date</label>
+      <input id="due" type="date">
+      <button class="btn" type="submit">Add task</button>
+    </form>
+
+    <section class="card" aria-label="Task list">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search tasks" aria-label="Search tasks">
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="active" aria-pressed="false">Active</button>
+          <button type="button" data-filter="done" aria-pressed="false">Done</button>
+        </div>
+      </div>
+      <ul id="list" class="list"></ul>
+      <p id="empty" class="empty" hidden></p>
+      <footer class="foot">
+        <span id="left"></span>
+        <button id="clear" class="link" type="button" hidden>Clear completed</button>
+      </footer>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+
+</body>
+</html>
